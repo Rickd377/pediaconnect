@@ -2,6 +2,9 @@ title: 'PediaConnect'
 client: 'Vereniging van Nederlandse Kinderartsen'
 status: 'active'
 years: [1]
+main_link: ''
+dev_link: ''
+tech_stack: ['HTML', 'CSS', 'JavaScript']
 
 # team:
 #   - name: '...'
