@@ -141,6 +141,8 @@
 
   /* others */
   --tasa-orbiter: "TASA Orbiter", sans-serif;
+  --page-nav-height: 70px;
+  --page-padding: 2rem;
 }
 
 *,
@@ -153,8 +155,15 @@
 
 body {
   min-height: 100svh;
+  line-height: 1.4;
   background-color: var(--base-bleached-silk);
   font-family: var(--tasa-orbiter);
+  padding-bottom: var(--page-nav-height);
+}
+
+ol,
+ul {
+  list-style-type: "";
 }
 
 .dropdown {
@@ -178,19 +187,27 @@ body {
   bottom: 0;
   z-index: 10;
   width: 100%;
+  height: var(--page-nav-height);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   background-color: var(--base-bleached-silk);
   padding: .75rem;
 
-  a.active {
-    background-color: var(--base-night-rider);
-    border-radius: .5rem;
+  a {
+    height: 100%;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
 
-    svg * {
-      fill: white;
+    &.active {
+      background-color: var(--base-night-rider);
+      border-radius: .5rem;
+
+      svg * {
+        fill: white;
+      }
     }
   }
 }
@@ -219,7 +236,14 @@ body {
 }
 
 section {
-  padding-inline: 2rem;
+  padding-inline: var(--page-padding);
+}
+
+.separator {
+  border: 1px inset;
+  color: gray;
+  margin-inline: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .dashboard-nav-section {
@@ -272,6 +296,160 @@ section {
     :last-child {
       background-color: var(--l600-xavier-blue);
       grid-column: span 2;
+    }
+  }
+}
+
+select {
+  appearance: base-select;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1rem;
+  font-family: inherit;
+  color: var(--d700-bleached-silk);
+  border: none;
+  border-radius: 10px;
+  background: #e6e6e6;
+  cursor: pointer;
+
+  &::picker(select) {
+    appearance: base-select;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border: none;
+  }
+
+  &:open {
+    background: var(--base-eclipse);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    color: var(--base-bleached-silk);
+    font-weight: 600;
+    
+    &::picker-icon {
+      rotate: .5turn;
+    }
+  }
+
+  option {
+    padding: .5rem .25rem;
+    background: var(--base-night-rider);
+    color: var(--base-bleached-silk);
+    font-weight: 400;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--base-bleached-silk);
+      color: black;
+    }
+    
+    &::checkmark {
+      content: "";
+    }
+  }
+}
+
+.dashboard-section {
+  display: grid;
+  gap: .5rem;
+
+  h2 {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--d700-bleached-silk);
+  }
+
+  p {
+    color: var(--base-night-rider);
+  }
+
+  .filter-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+
+    button:has(svg) {
+      background: none;
+      border: none;
+      border-radius: .5rem;
+      display: grid;
+      place-items: center;
+
+      &:hover {
+        background: var(--d200-night-rider);
+
+        svg * {
+          fill: white;
+        } 
+      }
+    }
+  }
+
+  .recommendations-slider {
+    overflow-x: auto;
+    display: flex;
+    gap: 2rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    article.card {
+      flex-shrink: 0;
+      width: 100%;
+      background: white;
+      border: 2px solid var(--l300-bleached-silk);
+      border-radius: 20px;
+      padding: 2rem 1rem;
+      min-height: 300px;
+      position: relative;
+
+      &.layout-1 {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 1rem;
+
+        p {
+          font-weight: 600;
+          font-size: 1.4rem;
+          color: var(--base-night-rider);
+          align-self: center;
+        }
+      }
+
+      .tags {
+        position: absolute;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+
+        button:has(svg) {
+          background: none;
+          border: none;
+        }
+      }
+
+      .topics {
+        display: flex;
+        gap: .5rem;
+
+        span {
+          padding: .5rem;
+          color: var(--l100-eclipse);
+          border: 1px solid var(--l200-eclipse);
+          border-radius: 99rem;
+          font-family: inherit;
+          font-size: inherit;
+          background: none;
+        }
+      }
     }
   }
 }
